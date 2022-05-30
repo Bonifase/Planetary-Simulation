@@ -23,10 +23,10 @@ class Planet:
         self.x_velocity = 0
         self.y_velocity = 0
     
-    def draw(self, window):
+    def draw(self, screen):
         x = self.x * self.SCALE + WIDTH / 2
         y = self.y * self.SCALE + HEIGHT / 2
-        pygame.draw.circle(window, x, y,)
+        pygame.draw.circle(screen, self.color, (x, y), self.radius)
 
 class Star:
     pass

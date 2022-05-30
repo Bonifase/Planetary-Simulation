@@ -1,35 +1,8 @@
-import sys
-import math
-import pygame
+from models import Planet
+from color_codes import YELLOW
 
-from models import (
-    Planet,
-    HEIGHT,
-    WIDTH
-)
+def get_planets():
+    sun = Planet(0, 0, 30, YELLOW, 1.98892 * 10 ** 30)
+    sun.sun = True
 
-
-pygame.init()
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Planetary Simulation")
-
-WHITE = (255, 255, 255)
-
-
-def main():
-    run = True
-    clock = pygame.time.Clock()
-
-    while run:
-        clock.tick(60)
-        # screen.fill(WHITE)
-        # pygame.display.update()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-                pygame.quit()
-                sys.exit(0)
-
-if __name__ == "__main__":
-    main()
+    return [sun]
