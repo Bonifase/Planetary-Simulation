@@ -1,7 +1,3 @@
-from re import S
-from this import d
-
-
 palindromic_primes = [
     2,3,5,7,11,101,131,151,181,191,313,353,373,383,
     727,757,787,797,919,929,10301,10501,10601,11311,
@@ -18,55 +14,57 @@ palindromic_squares = [
 ]
 palindromic_cubes = []
 
-def is_palindromic(string):
+def is_palindromic_string(string):
     l, r = 0, len(string)-1
     while l < r:
-        if string[l] != string[r]:
+        if string[l].lower() != string[r].lower():
             return False
         l += 1
         r -= 1
     return True
 
-s = "125686521"
-# print(is_palindromic("some"))
+print(is_palindromic_string("Rotator"))
+
+def is_palindromic_number(number):
+    reversed_number = 0
+    temp = number
+    while temp >= 1:
+        reversed_number = reversed_number * 10 + (temp % 10)
+        temp = temp // 10
+    return reversed_number == number
+
+
+print(is_palindromic_number(13431))
 
 def reverse_digits(digit):
     return int(str(digit)[::-1])
 
-def generate_palindromic(n):
-    f, s = n, reverse_digits(n)
+def generate_palindromic(start, iterations):
+    f, s = start, reverse_digits(start)
     records = 0
     pals = []
-    while f and s and records <= 10:
+
+    while f and s and records <= iterations:
         total = f + s
-        if is_palindromic(str(total)):
+        if is_palindromic_number(total):
             pals.append(total)    
         f = total
         s = reverse_digits(total)
         records += 1
-
     return pals
 
-print(generate_palindromic(183))
+print(generate_palindromic(183, 20))
 
-pals = []
+palindromic_squares = []
 for i in range(10, 1001):
-    if is_palindromic(str(i**2)):
-        pals.append({i:i**2})
-# print(pals)
+    if is_palindromic_number(i**2):
+        palindromic_squares.append({i:i**2})
 
-cubes = []
+print(palindromic_squares)
+
+palindromic_cubes = []
 for i in range(10, 1001):
-    if is_palindromic(str(i**3)):
-        cubes.append({i:i**3})
-# print(cubes)
-
-def rev_num(n):
-    rev = 0
-    i = n
-    while i >= 1:
-        rev = rev * 10 + (i % 10)
-        i = i // 10
-    return rev == n
-
-print(rev_num(13431))
+    if is_palindromic_number(i**3):
+        palindromic_cubes.append({i:i**3})
+    
+print(palindromic_cubes)
